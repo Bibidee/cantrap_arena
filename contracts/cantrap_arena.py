@@ -36,7 +36,7 @@ class CantrapArena(gl.Contract):
         self.vault_address=Address(vault_address); self.next_challenge_id=u256(1); self.next_attack_id=u256(1)
     @gl.public.write
     def bind_vault(self,vault_address:Address)->None:
-        if self.next_challenge_id!=u256(1) or self.vault_address!=Address("0x0000000000000000000000000000000000000000"): raise gl.vm.UserError("vault binding is immutable")
+        if self.next_challenge_id!=u256(1) or str(self.vault_address).lower()!="0x0000000000000000000000000000000000000000": raise gl.vm.UserError("vault binding is immutable")
         self.vault_address=Address(vault_address)
     @gl.public.write
     def create_challenge(self,title:str,task:str,policy:str,forbidden:str,dummy_canary:str,expiry_seconds:u256,bounty:u256)->u256:
