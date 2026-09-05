@@ -1,0 +1,2 @@
+import { AttackLab } from '@/components/attack-lab';
+export default async function Attack({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="page"><header><p className="eyebrow">SPECIMEN #{id.padStart(3,'0')} / COMMIT → DELAY → REVEAL → TEST</p><h1>Attack lab</h1><p>Payloads are contained benchmark content, not instructions for third-party systems.</p></header><AttackLab id={id}/></main>}

@@ -1,0 +1,8 @@
+{
+  "name": "cantrap",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": { "dev": "next dev", "build": "next build", "lint": "eslint app components lib tests --ext .ts,.tsx", "typecheck": "tsc --noEmit", "test": "vitest run" },
+  "dependencies": { "genlayer-js": "1.1.8", "next": "16.0.1", "react": "19.2.0", "react-dom": "19.2.0", "viem": "2.29.0", "zod": "latest", "framer-motion": "latest", "lucide-react": "latest" },
+  "devDependencies": { "@types/node": "latest", "@types/react": "latest", "@types/react-dom": "latest", "typescript": "latest", "tailwindcss": "4.1.16", "@tailwindcss/postcss": "4.1.16", "eslint": "latest", "@typescript-eslint/parser": "latest", "@typescript-eslint/eslint-plugin": "latest", "eslint-config-next": "16.0.1", "vitest": "latest", "jsdom": "latest" }
+}

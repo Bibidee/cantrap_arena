@@ -1,0 +1,1 @@
+export default async function Receipt({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="page"><p className="eyebrow">ATTACK RECEIPT #{id}</p><h1>Consensus record</h1><div className="empty">After finalization, this receipt shows the transaction, target excerpt, decision fields, and the authoritative Arena readback.</div></main>}

@@ -1,0 +1,2 @@
+import { describe, expect, it } from 'vitest'; import { STUDIONET, isStudionet } from '@/lib/genlayer/network'; import { genToWei } from '@/lib/validation/schemas';
+describe('production network guard',()=>{it('is permanently Studionet 61999',()=>{expect(STUDIONET.id).toBe(61999);expect(STUDIONET.rpcUrl).toBe('https://studio.genlayer.com/api');expect(isStudionet('0xf22f')).toBe(true);expect(isStudionet('0xf22d')).toBe(false)});it('never loses GEN precision',()=>expect(genToWei('1.000000000000000001')).toBe(1000000000000000001n));});

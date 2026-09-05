@@ -1,0 +1,1 @@
+export default function Hall(){return <main className="page"><p className="eyebrow">FIRST CONFIRMED BREAKS</p><h1>Hall of reproducibility</h1><div className="empty">No Arena address is configured. Once deployed, this view reads canonical BROKEN challenges directly from the Arena.</div></main>}

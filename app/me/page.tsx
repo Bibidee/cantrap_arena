@@ -1,0 +1,1 @@
+export default function Me(){return <main className="page"><p className="eyebrow">LOCAL COMMIT MATERIAL</p><h1>My attack receipts</h1><div className="empty">Connect a wallet to inspect locally saved salts and canonical attacks from the Arena.</div></main>}

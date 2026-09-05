@@ -1,0 +1,9 @@
+node_modules
+.next
+.env
+.env.local
+coverage
+*.pyc
+__pycache__
+*_ONE_SHOT_BUILD_PROMPT.md
+*.tsbuildinfo

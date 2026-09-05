@@ -1,0 +1,3 @@
+'use client';
+import Link from 'next/link'; import { useWallet } from '@/lib/wallet/provider';
+export function Nav(){const w=useWallet();return <nav><Link className="brand" href="/">CANTRAP<span>®</span></Link><div className="navlinks"><Link href="/challenges">challenges</Link><Link href="/hall">hall</Link><Link href="/new">new specimen</Link></div>{w.connected?<button className="wallet" onClick={w.disconnect}>{w.account?.slice(0,6)}…{w.account?.slice(-4)}</button>:<button className="wallet" onClick={w.connect} disabled={w.connecting}>{w.connecting?'connecting…':'connect wallet'}</button>}</nav>}
