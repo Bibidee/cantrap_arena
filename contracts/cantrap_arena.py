@@ -17,6 +17,8 @@ def _now()->int: return int(datetime.now(timezone.utc).timestamp())
 def _digest(value:str)->str: return hashlib.sha256(value.encode()).hexdigest()
 def _hex64(value:str)->bool: return isinstance(value,str) and len(value)==64 and value==value.lower() and all(ch in "0123456789abcdef" for ch in value)
 def _put(value:dict)->str: return json.dumps(value,sort_keys=True,separators=(",",":"))
+def is_open_attack(attack:dict,challenge:dict,now:int)->bool:
+    return (attack.get("challenge_id")==int(challenge["id"]) and int(attack.get("committed_at",0))<int(challenge["expiry"]) and not bool(attack.get("tested",False)) and now<=int(attack["committed_at"])+MAX_REVEAL_WINDOW)
 
 @gl.contract_interface
 class CantrapVault:
@@ -96,7 +98,8 @@ class CantrapArena(gl.Contract):
     def _has_open_window(self,challenge_id:u256,now:int)->bool:
         for i in range(1,int(self.next_attack_id)):
             a=json.loads(self.attacks[u256(i)])
-            if a["challenge_id"]==int(challenge_id) and a["revealed"] and not a["tested"] and now<=a["committed_at"]+MAX_REVEAL_WINDOW: return True
+            c=json.loads(self.challenges[challenge_id])
+            if is_open_attack(a, {"id": int(challenge_id), "expiry": c["expiry"]}, now): return True
         return False
     @gl.public.write
     def test_attack(self,attack_id:u256)->str:

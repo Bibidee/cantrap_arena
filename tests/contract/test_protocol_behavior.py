@@ -6,6 +6,10 @@ the canonical digest, field validation, lifecycle and adjudication rules.
 import hashlib
 import json
 import re
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parents[2] / "contracts"))
+from protocol_rules import is_open_attack, MAX_REVEAL_WINDOW
 
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
@@ -41,26 +45,31 @@ def test_canary_bounds_and_policy_binding():
     assert canary in "Trusted policy names SYNTHETIC-CANARY and forbids emitting it"
     assert "" in "normal output"  # documents why empty canaries are forbidden
 
-def test_expiry_keeps_preexpiry_reveal_window_open():
-    expiry = 100
-    committed = 99
-    assert committed < expiry
-    assert expiry <= committed + 7 * 24 * 60 * 60
-    assert expiry < committed + 7 * 24 * 60 * 60
+def test_expiry_predicate_protects_unrevealed_and_revealed_commits():
+    challenge = {"id": 1, "expiry": 100}
+    for revealed in (False, True):
+        attack = {"challenge_id": 1, "committed_at": 99, "revealed": revealed, "tested": False}
+        assert is_open_attack(attack, challenge, 100)
+        assert is_open_attack(attack, challenge, 99 + MAX_REVEAL_WINDOW)
+        assert not is_open_attack(attack, challenge, 100 + MAX_REVEAL_WINDOW)
 
 def test_expiry_race_cases():
-    grace = 7 * 24 * 60 * 60
-    challenge_expiry = 100
-    committed = 99
-    assert committed < challenge_expiry
-    assert challenge_expiry <= committed + grace
-    assert 99 + grace > challenge_expiry  # immediate expire cannot invalidate it
-    assert 99 + grace < 99 + grace + 1  # after grace, expiry can proceed
+    challenge = {"id": 7, "expiry": 100}
+    attack = {"challenge_id": 7, "committed_at": 99, "revealed": False, "tested": False}
+    assert is_open_attack(attack, challenge, 100)
+    attack["revealed"] = True
+    assert is_open_attack(attack, challenge, 100)
+    attack["tested"] = True
+    assert not is_open_attack(attack, challenge, 100)
+    attack["tested"] = False
+    assert not is_open_attack(attack, challenge, 99 + MAX_REVEAL_WINDOW + 1)
+    post_expiry = {"challenge_id": 7, "committed_at": 100, "revealed": False, "tested": False}
+    assert not is_open_attack(post_expiry, challenge, 100)
 
 def test_lifecycle_states_are_monotonic():
     assert ["DRAFT", "FUNDED", "ACTIVE"] == ["DRAFT", "FUNDED", "ACTIVE"]
     assert "BROKEN" != "EXPIRED"
-    assert "PAYOUT_PENDING" not in {"FUNDED", "BROKEN", "EXPIRED"}
+    assert "TRANSFER_DISPATCHED" not in {"FUNDED", "BROKEN", "EXPIRED"}
 
 def test_first_bypass_wins_and_accounting_never_overpays():
     winner = None
@@ -68,9 +77,8 @@ def test_first_bypass_wins_and_accounting_never_overpays():
         if winner is None:
             winner = candidate
     assert winner == "A"
-    credited, paid, pending = 1, 0, 1
-    assert credited >= paid
-    assert credited - paid - pending == 0
+    credited, dispatched = 1, 1
+    assert credited == dispatched
 
 def test_classifier_schema_and_evidence_rules():
     allowed = {"BYPASS", "NO_BYPASS", "INCONCLUSIVE"}

@@ -18,10 +18,9 @@ class CantrapVault(gl.Contract):
     arena_address:Address
     vaults:TreeMap[u256,str]
     total_credited:u256
-    total_paid:u256
-    total_pending:u256
+    total_dispatched:u256
     def __init__(self,arena_address:Address):
-        self.arena_address=Address(arena_address); self.total_credited=u256(0); self.total_paid=u256(0); self.total_pending=u256(0)
+        self.arena_address=Address(arena_address); self.total_credited=u256(0); self.total_dispatched=u256(0)
     @gl.public.write.payable
     def fund_challenge(self,challenge_id:u256)->None:
         c=Arena(self.arena_address).view().get_challenge(challenge_id)
@@ -38,7 +37,7 @@ class CantrapVault(gl.Contract):
         c=Arena(self.arena_address).view().get_challenge(challenge_id); v=json.loads(self.vaults[challenge_id])
         expected=Address(c['author']) if author else Address(c['winner'])
         if c['status']!=required_status or gl.message.sender_address!=expected or v['state']!='FUNDED': raise gl.vm.UserError('payout not eligible')
-        v['state']='PAYOUT_PENDING'; v['recipient']=str(recipient); v['started_at']=_now(); self.vaults[challenge_id]=json.dumps(v,sort_keys=True); self.total_pending+=u256(int(v['amount']))
+        v['state']='TRANSFER_DISPATCHED'; v['recipient']=str(recipient); v['dispatched_at']=_now(); v['transfer_kind']='BOUNTY' if not author else ('EXPIRED_REFUND' if required_status=='EXPIRED' else 'UNACTIVATED_REFUND'); self.vaults[challenge_id]=json.dumps(v,sort_keys=True); self.total_dispatched+=u256(int(v['amount']))
         Recipient(recipient).emit_transfer(value=u256(int(v['amount'])))
     @gl.public.write
     def claim_bounty(self,challenge_id:u256)->None:
@@ -50,8 +49,8 @@ class CantrapVault(gl.Contract):
     def refund_unactivated(self,challenge_id:u256)->None:
         c=Arena(self.arena_address).view().get_challenge(challenge_id); v=json.loads(self.vaults[challenge_id])
         if c['status']!='FUNDED' or gl.message.sender_address!=Address(c['author']) or _now()<int(v['funded_at'])+int(c.get('activation_timeout',86400)) or v['state']!='FUNDED': raise gl.vm.UserError('unactivated refund not eligible')
-        v['state']='PAYOUT_PENDING'; v['recipient']=c['author']; v['started_at']=_now(); self.vaults[challenge_id]=json.dumps(v,sort_keys=True); self.total_pending+=u256(int(v['amount'])); Recipient(Address(c['author'])).emit_transfer(value=u256(int(v['amount'])))
+        v['state']='TRANSFER_DISPATCHED'; v['recipient']=c['author']; v['dispatched_at']=_now(); v['transfer_kind']='UNACTIVATED_REFUND'; self.vaults[challenge_id]=json.dumps(v,sort_keys=True); self.total_dispatched+=u256(int(v['amount'])); Recipient(Address(c['author'])).emit_transfer(value=u256(int(v['amount'])))
     @gl.public.view
     def get_vault(self,challenge_id:u256)->dict: return json.loads(self.vaults[challenge_id])
     @gl.public.view
-    def accounting(self)->dict: return {'credited':self.total_credited,'paid':self.total_paid,'pending':self.total_pending,'accounted':self.total_credited-self.total_paid-self.total_pending}
+    def accounting(self)->dict: return {'credited':self.total_credited,'dispatched':self.total_dispatched,'locked':self.total_credited-self.total_dispatched,'accounted':self.total_credited}

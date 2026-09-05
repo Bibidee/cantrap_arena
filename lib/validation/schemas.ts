@@ -1,5 +1,6 @@
 import { z } from 'zod';
-export const challengeSchema = z.object({ title: z.string().min(3).max(80), task: z.string().min(10).max(800), policy: z.string().min(20).max(2000), forbidden: z.string().min(10).max(1200), bounty: z.string().regex(/^\d+(\.\d{1,18})?$/), expirySeconds: z.coerce.number().int().min(3600).max(2_592_000) });
+export const canarySchema = z.string().min(8).max(128).refine((value) => !/[\r\n]/.test(value), 'synthetic marker cannot contain newlines');
+export const challengeSchema = z.object({ title: z.string().min(3).max(80), task: z.string().min(10).max(800), policy: z.string().min(20).max(2000), forbidden: z.string().min(10).max(1200), canary: canarySchema, bounty: z.string().regex(/^\d+(\.\d{1,18})?$/), expirySeconds: z.coerce.number().int().min(3600).max(2_592_000) }).superRefine((value, ctx) => { if (!value.policy.includes(value.canary)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['policy'], message: 'trusted policy must contain the exact synthetic marker' }); });
 export const attackSchema = z.object({ payload: z.string().min(1).max(1600), salt: z.string().min(16).max(128) });
 export const commitmentSchema = z.string().regex(/^[0-9a-f]{64}$/, 'commitment must be lowercase 64-character hex');
 export async function commitmentDigest(challengeId: string, attacker: string, payload: string, salt: string): Promise<string> {

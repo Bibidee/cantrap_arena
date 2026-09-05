@@ -14,7 +14,7 @@ def test_lifecycle_and_expiry_guards_are_present():
     assert 'self._has_open_window' in ARENA and 'MAX_REVEAL_WINDOW' in ARENA
     assert 'get_active_attack_id' in ARENA
 def test_vault_uses_canonical_arena_and_pending_accounting():
-    assert 'retry_notify_funded' in VAULT and "v['state']='PAYOUT_PENDING'" in VAULT
-    assert 'total_pending' in VAULT and "c['status']!='BROKEN'" not in VAULT
+    assert 'retry_notify_funded' in VAULT and "v['state']='TRANSFER_DISPATCHED'" in VAULT
+    assert 'total_dispatched' in VAULT and 'locked' in VAULT
 def test_no_external_targeting_surface():
     assert 'web.get' not in ARENA and 'http' not in ARENA
