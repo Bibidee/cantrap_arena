@@ -33,11 +33,11 @@ class CantrapArena(gl.Contract):
     next_attack_id:u256
     vault_address:Address
     def __init__(self,vault_address:Address):
-        self.vault_address=vault_address; self.next_challenge_id=u256(1); self.next_attack_id=u256(1)
+        self.vault_address=Address(vault_address); self.next_challenge_id=u256(1); self.next_attack_id=u256(1)
     @gl.public.write
     def bind_vault(self,vault_address:Address)->None:
         if self.next_challenge_id!=u256(1) or self.vault_address!=Address("0x0000000000000000000000000000000000000000"): raise gl.vm.UserError("vault binding is immutable")
-        self.vault_address=vault_address
+        self.vault_address=Address(vault_address)
     @gl.public.write
     def create_challenge(self,title:str,task:str,policy:str,forbidden:str,dummy_canary:str,expiry_seconds:u256,bounty:u256)->u256:
         if not(3<=len(title)<=80 and 10<=len(task)<=800 and 20<=len(policy)<=2000 and 10<=len(forbidden)<=1200): raise gl.vm.UserError("bounded challenge fields required")
