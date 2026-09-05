@@ -4,7 +4,9 @@ Network: Studionet; chain ID `61999`; RPC `https://studio.genlayer.com/api`; exp
 
 Before a funded deployment, run Python compile/static checks and use Studio schema generation for both sources. Record source byte count and SHA-256. Deploy Arena with the zero address as `vault_address`, deploy Vault with the Arena address, then call `Arena.bind_vault(Vault address)` before the first challenge. Set `NEXT_PUBLIC_ARENA_ADDRESS` and `NEXT_PUBLIC_VAULT_ADDRESS`. Run an exact-value fund, Arena activation, commit, reveal, test, and final readback. Record only actual tx hashes, execution results, and addresses.
 
-## Recorded deployment evidence
+## Recorded deployment evidence (stale after the corrective source pass)
+
+The addresses below are the prior source-matched deployment and remain useful for historical readback only. They do **not** match the current contract hashes below. A new Arena/Vault deployment and binding are required before calling this revision submission-ready.
 
 The unlocked CLI account `0x79b3Ecbe6a65beE93b2Fcda78e6909892671507F` deployed and finalized the reviewed sources on Studionet:
 
@@ -12,7 +14,7 @@ The unlocked CLI account `0x79b3Ecbe6a65beE93b2Fcda78e6909892671507F` deployed a
 - Vault: `0xdb8eAc006fb4410d3D58a344137f1338a9692b60`; deployment tx `0x54a35b02485ec90ccf054c960778da82f27dc3fca8fd4c5d97e0a518937e4e23`; finalized with execution `SUCCESS`.
 - Arena/Vault binding: tx `0x3bf630ad0530109d0515f813afca85fbdbb04a4081806475f28e3f5df502cfc4`; finalized with execution `SUCCESS`.
 
-Reviewed source evidence: Arena 8,048 bytes, SHA-256 `CE0C05777852EA0205596663523DD0F2FF00AEB56AD35EF0050FC229E9A14C92`; Vault 2,779 bytes, SHA-256 `6E373EF4D11739A56FAF7270AE3C031651920ABB08D30B15D3B746A7B5D2BF6C`.
+Current source evidence: Arena SHA-256 `E03090317FFDF69702C8358D9A6B29EAA9D1D4911E4D3ACAC6EE330B03DC7446`; Vault SHA-256 `49F4F89AE73EEDA242F85B462BF0A2B99F101D733CB26200895BAE2322710420`. No deployment hash is claimed for these files yet.
 
 ## Live lifecycle evidence
 

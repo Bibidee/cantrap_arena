@@ -4,6 +4,10 @@
   "account": "0x79b3Ecbe6a65beE93b2Fcda78e6909892671507F",
   "arena": "0x2Ec33E3715d0F74153A6CA3Adfc77956Df248D7d",
   "vault": "0xdb8eAc006fb4410d3D58a344137f1338a9692b60",
+  "sourceMatched": false,
+  "currentArenaSha256": "E03090317FFDF69702C8358D9A6B29EAA9D1D4911E4D3ACAC6EE330B03DC7446",
+  "currentVaultSha256": "49F4F89AE73EEDA242F85B462BF0A2B99F101D733CB26200895BAE2322710420",
+  "note": "Historical lifecycle evidence for the prior deployment; redeployment is required for the current source.",
   "steps": [
     {
       "label": "fund_challenge_1_GEN",
