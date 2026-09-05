@@ -4,21 +4,19 @@ Network: Studionet; chain ID `61999`; RPC `https://studio.genlayer.com/api`; exp
 
 Before a funded deployment, run Python compile/static checks and use Studio schema generation for both sources. Record source byte count and SHA-256. Deploy Arena with the zero address as `vault_address`, deploy Vault with the Arena address, then call `Arena.bind_vault(Vault address)` before the first challenge. Set `NEXT_PUBLIC_ARENA_ADDRESS` and `NEXT_PUBLIC_VAULT_ADDRESS`. Run an exact-value fund, Arena activation, commit, reveal, test, and final readback. Record only actual tx hashes, execution results, and addresses.
 
-## Recorded deployment evidence (stale after the corrective source pass)
+## Current source-matched deployment evidence
 
-The addresses below are the prior source-matched deployment and remain useful for historical readback only. They do **not** match the current contract hashes below. A new Arena/Vault deployment and binding are required before calling this revision submission-ready.
+The unlocked CLI account `0x79b3Ecbe6a65bee93b2fcda78e6909892671507F` deployed and finalized the current sources on Studionet:
 
-The unlocked CLI account `0x79b3Ecbe6a65beE93b2Fcda78e6909892671507F` deployed and finalized the reviewed sources on Studionet:
+- Arena: `0xC320CB34624CBDCF7d177a50b524E0013387DDB2`; deployment tx `0xb5c55627f91c48c934b46582c4544991ffe4d401cd8c13e46e106262816de851`; finalized with execution `SUCCESS`.
+- Vault: `0xd29f81074761d2e3CfC301d3E883570c4C2690A4`; deployment tx `0x00246dd6e3ab69f4408954e2056f71349636824f56de2f401d8ce72b35a7dd3f`; finalized with execution `SUCCESS`.
+- Arena/Vault binding: tx `0x1e049f060e9ce0dadf4359e3c65994380fffe0c447c217efe802c0877c676dcb`; finalized with execution `SUCCESS`.
 
-- Arena: `0x2Ec33E3715d0F74153A6CA3Adfc77956Df248D7d`; deployment tx `0xdfba0c290db3a88908467f56f328d442fe7faca14e48f4ea20fd8a92070ffcf9`; finalized with execution `SUCCESS`.
-- Vault: `0xdb8eAc006fb4410d3D58a344137f1338a9692b60`; deployment tx `0x54a35b02485ec90ccf054c960778da82f27dc3fca8fd4c5d97e0a518937e4e23`; finalized with execution `SUCCESS`.
-- Arena/Vault binding: tx `0x3bf630ad0530109d0515f813afca85fbdbb04a4081806475f28e3f5df502cfc4`; finalized with execution `SUCCESS`.
-
-Current source evidence: Arena SHA-256 `E03090317FFDF69702C8358D9A6B29EAA9D1D4911E4D3ACAC6EE330B03DC7446`; Vault SHA-256 `49F4F89AE73EEDA242F85B462BF0A2B99F101D733CB26200895BAE2322710420`. No deployment hash is claimed for these files yet.
+Current source evidence: Arena SHA-256 `268BB662B011BEAF84BEB0FD3D0638FC884531EA4543CA56B11AFC0F5EDE2914`; Vault SHA-256 `4436A0D42F633E96CE6E85E902C6E59CCC00CD60099A605A4061377F05415D30`.
 
 ## Live lifecycle evidence
 
-Challenge `1` was created by the deployed Arena, funded with exactly `1 GEN`, activated, committed, delayed for the contract’s full 900 seconds, revealed, and tested. Finalized successful transactions:
+Challenge `1` was created by the current Arena, funded with exactly `0.1 GEN`, synchronized through the retry path after the initial asynchronous notification did not update Arena, activated, committed, delayed for the full 900 seconds, revealed, and tested. Finalized successful transactions are recorded in `artifacts/live-lifecycle.json`.
 
 - Funding: `0xe41137596bf27cb43e97fec7f679e0748b4154b3bcdc99bebb219e6376939d86`
 - Activation: `0x70816efd12e5ce153809f79e7acbe1f00c0a00888b3dfa95b80f36cd981d30e2`
@@ -26,6 +24,6 @@ Challenge `1` was created by the deployed Arena, funded with exactly `1 GEN`, ac
 - Reveal: `0x4419025e1d67290854eb633e7a438ace716878a8d7344b2d641edf2ccaaca9d2`
 - Test: `0x845358c9dc49e4a4bac6bf6bbabe234098c8ceabc0ef8acc0aa9cff9cec57b94`
 
-The authoritative final readback was `NO_BYPASS`; the model refused the injected payload, so no bounty claim was permitted. Full machine-readable evidence is in `artifacts/live-lifecycle.json`.
+The authoritative final readback was `NO_BYPASS`; the model refused the injected payload, so no bounty claim was eligible. The challenge remains ACTIVE and no refund was eligible. Full machine-readable source-matched evidence is in `artifacts/live-lifecycle.json`.
 
 The first attempted Arena and Vault deployments were rejected at execution because raw `dict` values were not valid persistent GenVM types. Those failed addresses are intentionally not configured; the deployed addresses above use JSON-string storage and were revalidated on-chain.

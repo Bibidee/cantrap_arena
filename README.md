@@ -6,7 +6,7 @@ It targets **Studionet (chain 61999)** and pins `genlayer-js` to exactly `1.1.8`
 
 ## Run
 
-`npm ci && npm run dev` launches the frontend. The production network is Studionet (chain 61999); the current configured public addresses are Arena `0x2Ec33E3715d0F74153A6CA3Adfc77956Df248D7d` and Vault `0xdb8eAc006fb4410d3D58a344137f1338a9692b60` until a source-matched redeployment is recorded. Browser writes use an injected EIP-1193 wallet, wait for FINALIZED execution success, and reread canonical state.
+`npm ci && npm run dev` launches the frontend. The production network is Studionet (chain 61999); the current source-matched addresses are Arena `0xC320CB34624CBDCF7d177a50b524E0013387DDB2` and Vault `0xd29f81074761d2e3CfC301d3E883570c4C2690A4`. Browser writes use an injected EIP-1193 wallet, wait for FINALIZED execution success, and reread canonical state.
 
 No backend, server signer, external target, or real secret is used. Read [the deployment procedure](docs/DEPLOYMENT.md) before deploying.
 
