@@ -8,6 +8,8 @@ It targets **Studionet (chain 61999)** and pins `genlayer-js` to exactly `1.1.8`
 
 `npm ci && npm run dev` launches the frontend. The production network is Studionet (chain 61999); the current source-matched addresses are Arena `0xf686419939E13cBC7CDfA9657741c46FE0Fa213B` and Vault `0x728A33026730d1B04E2D698Cd4aD90541FE27D94`. Browser writes use an injected EIP-1193 wallet, wait for FINALIZED execution success, and reread canonical state.
 
+Every write distinguishes wallet rejection, pending/submitted/consensus phases, finalized GenVM rollback, canonical readback mismatch, and finalized success. Transaction hashes are retained locally with explorer links. Attack preparation and committed state are recoverable from browser receipts, but Arena remains the canonical source for attack IDs and lifecycle truth.
+
 No backend, server signer, external target, or real secret is used. Read [the deployment procedure](docs/DEPLOYMENT.md) before deploying.
 
 The canary is a public synthetic benchmark marker. It is deliberately named in the trusted policy and is not a secret stored on-chain. A leak only means the contained sandbox violated that policy. Commitments are lowercase 64-character SHA-256 hex without a `0x` prefix, over `challenge_id:attacker:payload:salt`.

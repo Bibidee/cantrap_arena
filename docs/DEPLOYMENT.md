@@ -17,3 +17,5 @@ Challenge `1` was created, funded with exactly `0.1 GEN`, synchronized through t
 Expiry model tests verify that both revealed and unrevealed pre-expiry commitments block `expire()` during the maximum reveal window, while tested attacks and elapsed windows no longer block it.
 
 Vault transfers are modeled as exactly-once `TRANSFER_DISPATCHED` state transitions. GenLayer external value transfers are asynchronous; recipient-side settlement is external evidence and is never represented as synchronous `PAID` state. This lifecycle did not create an eligible transfer-dispatch case.
+
+The frontend production deployment is `https://cantraparena.vercel.app`. Vercel deployment identifiers and current environment configuration are managed by the linked `bibidees-projects/cantrap_arena` project. Vercel normalizes the requested underscore project name into the public alias `cantraparena.vercel.app`.
