@@ -10,8 +10,8 @@ const privateKey = await keytar.getPassword('genlayer-cli', 'account:faultline-d
 if (!privateKey) throw new Error('The unlocked CLI keychain account is unavailable.');
 const account = createAccount(privateKey);
 const client = createClient({ chain: studionet, account });
-const arena = '0x2Ec33E3715d0F74153A6CA3Adfc77956Df248D7d';
-const vault = '0xdb8eAc006fb4410d3D58a344137f1338a9692b60';
+const arena = '0x57Af04B020861de59EBf12B0079A44333fdD897E';
+const vault = '0x4c98d293DD8E239BA9888361ECd612a10382E420';
 const bounty = 1n * 10n ** 18n;
 const evidence = { network: 'Studionet', chainId: 61999, account: account.address, arena, vault, steps: [] };
 
