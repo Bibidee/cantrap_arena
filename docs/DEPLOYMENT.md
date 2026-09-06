@@ -2,13 +2,13 @@
 
 Network: Studionet; chain ID `61999`; RPC `https://studio.genlayer.com/api`; explorer `https://explorer-studio.genlayer.com`.
 
-The contract source commit is `1cf7f6a`. Arena SHA-256 is `36D42B0B24DC4F8572DD83939B775E0F086EE1BAEEC1DD64FA83AC4D130C8ABD`; Vault SHA-256 is `63FB9CC78F89E42E3085B972668333CD371AF09B76E8F2C207471F8EF0DD8CC0`. Both schemas were generated successfully before deployment.
+The changed Arena source SHA-256 is `B5B699EC75BF6B69604A2C7D054AECDF1C7955D779A21107E989F221ECA94E7A`; Vault SHA-256 is `63FB9CC78F89E42E3085B972668333CD371AF09B76E8F2C207471F8EF0DD8CC0`. Both schemas were generated successfully before deployment.
 
 ## Current source-matched deployment
 
-- Arena: `0xf686419939E13cBC7CDfA9657741c46FE0Fa213B`; deployment tx `0x9c6036739432813105b39309c41ab2174f9238821b304170e26a2ce5f7c2bf93`; `FINALIZED` / `SUCCESS`.
-- Vault: `0x728A33026730d1B04E2D698Cd4aD90541FE27D94`; deployment tx `0x8e0ab02ae47d2f276cc6e03f0253848183d1f2b68f9791613b8d8a96553665ef`; `FINALIZED` / `SUCCESS`.
-- Binding: tx `0x42ccc600eaf66ae6a4019c573085875a37833ed6eb0aa52379e10e7dc429d82f`; `FINALIZED` / `SUCCESS`.
+- Arena: `0x57Af04B020861de59EBf12B0079A44333fdD897E`; deployment tx `0xaa4e635ad1c90756466c7b169984f6182e2dbddf5479e84878c95f453eed03b3`; `FINALIZED` / `SUCCESS`.
+- Vault: `0x4c98d293DD8E239BA9888361ECd612a10382E420`; deployment tx `0x3c7f38f921fbe9942c8a26512d130aa7fefea8a3aa734de5569dabe0a3822702`; `FINALIZED` / `SUCCESS`.
+- Binding: tx `0x79f0a0de5b87fbbea8158ac3b5c038ecbc929ca6d3106217fb2b2cf43040a6c3`; `FINALIZED` / `SUCCESS`.
 
 ## Fresh lifecycle evidence
 
@@ -18,4 +18,4 @@ Expiry model tests verify that both revealed and unrevealed pre-expiry commitmen
 
 Vault transfers are modeled as exactly-once `TRANSFER_DISPATCHED` state transitions. GenLayer external value transfers are asynchronous; recipient-side settlement is external evidence and is never represented as synchronous `PAID` state. This lifecycle did not create an eligible transfer-dispatch case.
 
-The frontend production deployment is `https://cantraparena.vercel.app`. Vercel deployment identifiers and current environment configuration are managed by the linked `bibidees-projects/cantrap_arena` project. Vercel normalizes the requested underscore project name into the public alias `cantraparena.vercel.app`.
+The frontend production deployment is `https://cantraparena.vercel.app`. Its Vercel environment must use the Arena and Vault addresses above.

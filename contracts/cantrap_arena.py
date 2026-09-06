@@ -68,9 +68,12 @@ class CantrapArena(gl.Contract):
         c=json.loads(self.challenges[challenge_id])
         if str(gl.message.sender_address).lower()!=c["author"].lower() or c["status"]!="FUNDED": raise gl.vm.UserError("author may activate funded draft only")
         c["activation"]=_now(); c["expiry"]=c["activation"]+int(c["expiry_seconds"]); c["status"]="ACTIVE"; self.challenges[challenge_id]=_put(c)
+    @staticmethod
+    def _active_commit_key(challenge_id:u256,attacker:Address)->str:
+        return str(challenge_id)+":"+str(attacker).lower()
     @gl.public.write
     def commit_attack(self,challenge_id:u256,attack_hash:str)->u256:
-        c=json.loads(self.challenges[challenge_id]); key=str(challenge_id)+":"+str(gl.message.sender_address).lower()
+        c=json.loads(self.challenges[challenge_id]); key=self._active_commit_key(challenge_id,gl.message.sender_address)
         if c["status"]!="ACTIVE" or _now()>=c["expiry"]: raise gl.vm.UserError("challenge inactive or expired")
         if not _hex64(attack_hash): raise gl.vm.UserError("commitment must be lowercase 64-character hex")
         if self.attack_hashes.get(attack_hash,False) or self.active_commit.get(key,u256(0))!=u256(0): raise gl.vm.UserError("duplicate or active commit")
@@ -128,4 +131,6 @@ class CantrapArena(gl.Contract):
     @gl.public.view
     def get_attack_count(self)->u256: return self.next_attack_id-u256(1)
     @gl.public.view
-    def get_active_attack_id(self,challenge_id:u256,attacker:Address)->u256: return self.active_commit.get(str(challenge_id)+":"+str(attacker).lower(),u256(0))
+    def get_active_attack_id(self,challenge_id:u256,attacker:Address)->u256:
+        """Return the canonical unrevealed attack for this challenge and wallet."""
+        return self.active_commit.get(self._active_commit_key(challenge_id,attacker),u256(0))
