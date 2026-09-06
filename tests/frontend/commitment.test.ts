@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { commitmentDigest, commitmentSchema } from '@/lib/validation/schemas';
 import { challengeSchema } from '@/lib/validation/schemas';
+import { getAddress } from 'viem';
 
 describe('canonical commitment format', () => {
   it('accepts exactly lowercase 64-character hexadecimal hashes', () => expect(() => commitmentSchema.parse('a'.repeat(64))).not.toThrow());
@@ -13,6 +14,12 @@ describe('canonical commitment format', () => {
     const digest = await commitmentDigest('7', '0xabc', 'payload', 'salt-123456789012');
     expect(digest).toMatch(/^[0-9a-f]{64}$/);
     expect(digest).toBe('1439e9c2080c51aec382363557a1b2cdfaaecd41872bb02344fd7d7da187a86f');
+  });
+  it('canonicalizes a wallet address before hashing the reveal preimage', async () => {
+    const attacker = getAddress('0xea8c474ced58db2750f21a797636a64fef39297d');
+    const digest = await commitmentDigest('3', attacker, 'payload', 'salt-123456789012');
+    expect(attacker).toBe(getAddress(attacker.toLowerCase()));
+    expect(digest).not.toBe(await commitmentDigest('3', attacker.toLowerCase(), 'payload', 'salt-123456789012'));
   });
 });
 
