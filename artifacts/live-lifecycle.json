@@ -8,6 +8,7 @@
   "vault": "0x4c98d293DD8E239BA9888361ECd612a10382E420",
   "arenaSha256": "B5B699EC75BF6B69604A2C7D054AECDF1C7955D779A21107E989F221ECA94E7A",
   "vaultSha256": "63FB9CC78F89E42E3085B972668333CD371AF09B76E8F2C207471F8EF0DD8CC0",
+  "frontendDeployment": {"commit": "e538e8def20ee73a612f0093f252a3b40ef3c782", "vercelDeploymentId": "dpl_2bfG3ZoxZ1WW5yoGQ9AWT6aPwq3b", "url": "https://cantraparena.vercel.app", "status": "READY", "build": "SUCCESS"},
   "deployments": {
     "arena": {"hash": "0xaa4e635ad1c90756466c7b169984f6182e2dbddf5479e84878c95f453eed03b3", "address": "0x57Af04B020861de59EBf12B0079A44333fdD897E", "status": "FINALIZED", "execution": "SUCCESS"},
     "vault": {"hash": "0x3c7f38f921fbe9942c8a26512d130aa7fefea8a3aa734de5569dabe0a3822702", "address": "0x4c98d293DD8E239BA9888361ECd612a10382E420", "status": "FINALIZED", "execution": "SUCCESS"},
