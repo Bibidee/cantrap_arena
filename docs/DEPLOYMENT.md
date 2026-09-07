@@ -12,7 +12,7 @@ The changed Arena source SHA-256 is `B5B699EC75BF6B69604A2C7D054AECDF1C7955D779A
 
 ## Fresh lifecycle evidence
 
-Challenge `1` was created, funded with exactly `0.1 GEN`, synchronized through the retry path, activated, committed, delayed for the full 900 seconds, revealed, tested, and read back canonically. The final verdict was `NO_BYPASS`; no payout was eligible. Exact transaction records and readback are in `artifacts/live-lifecycle.json`.
+Challenge `1` was created, funded with exactly `0.01 GEN` (`10000000000000000` raw units), synchronized through the retry path, activated, committed, delayed for the full 900 seconds, revealed, tested, and read back canonically. The final verdict was `NO_BYPASS`; no payout was eligible. Exact transaction records and readback are in `artifacts/live-lifecycle.json`.
 
 Expiry model tests verify that both revealed and unrevealed pre-expiry commitments block `expire()` during the maximum reveal window, while tested attacks and elapsed windows no longer block it.
 
