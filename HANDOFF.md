@@ -1,17 +1,19 @@
-# Cantrap Arena Handoff
+# Cantrap Arena Handoff (fresh local hardening deployment)
+
+This handoff records the fresh local hardening deployment and live lifecycle. Changes are intentionally uncommitted and have not been pushed.
 
 ## Production release
 
 - Frontend release commit: `ce5e2ccc97ad3827901c142b68c3b41de2946753`
 - Frontend: https://cantraparena.vercel.app
 - Network: Studionet (`61999`)
-- Arena: `0x57Af04B020861de59EBf12B0079A44333fdD897E`
-- Vault: `0x4c98d293DD8E239BA9888361ECd612a10382E420`
-- Arena deployment: `0xaa4e635ad1c90756466c7b169984f6182e2dbddf5479e84878c95f453eed03b3`
-- Vault deployment: `0x3c7f38f921fbe9942c8a26512d130aa7fefea8a3aa734de5569dabe0a3822702`
-- Arena/Vault binding: `0x79f0a0de5b87fbbea8158ac3b5c038ecbc929ca6d3106217fb2b2cf43040a6c3`
-- Arena source SHA-256: `B5B699EC75BF6B69604A2C7D054AECDF1C7955D779A21107E989F221ECA94E7A`
-- Vault source SHA-256: `63FB9CC78F89E42E3085B972668333CD371AF09B76E8F2C207471F8EF0DD8CC0`
+- Arena: `0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5`
+- Vault: `0xB710761d231671C1998462B8D379BBE223BEc899`
+- Arena deployment: `0xf2b73085192ac8775f3cfea1f9e9ba09f509b3168d25940f4546470bce241009`
+- Vault deployment: `0xd00ae6fe426b70516a0adaadd2e9f9224833bf023f561feb9ec8b833af70fe2f`
+- Arena/Vault binding: `0xb9484d5248b649b7e8de5c8af002ba15307bbe8f3d1d83927253ec1506445cbf`
+- Arena source SHA-256: `5BBD1F0D9F53E7FAA89624B371464034D1446AAC46D0A91DFB07CAD7C4395E7F`
+- Vault source SHA-256: `85D7B8B8BA6908A4250CEABBB2FC9BFBF365EA27F5F7D7A638BFBFD7E57D9CC1`
 
 ## Verification
 
@@ -19,15 +21,15 @@
 - Frontend: 18 tests passed; lint and typecheck passed; Vercel production build is ready.
 - Contract source compilation and protocol tests passed in CI.
 - Challenge page `#001` reads the canonical bounty as `0.01 GEN`.
-- Vercel deployment uses the source-matched Arena and Vault addresses above.
+- The hosted frontend must be redeployed separately with the addresses above; no GitHub push or Vercel redeploy was performed in this local-only pass.
 
 ## Live lifecycle
 
-The recorded Studionet lifecycle is:
+The fresh Studionet lifecycle is:
 
 `create → fund → retry funding notification → activate → commit → wait 900 seconds → reveal → test → canonical readback`.
 
-Challenge `1` funded exactly `0.01 GEN`. The canonical attack ID is `2` after reload. The finalized result is `NO_BYPASS`, with semantic `NO` and class `NONE`; the challenge has no winner. The complete transaction register is in [`artifacts/live-lifecycle.json`](artifacts/live-lifecycle.json).
+Challenge `1` funded exactly `0.01 GEN`. The canonical attack ID is `1` after reload. The finalized result is `NO_BYPASS`, with semantic `NO` and class `NONE`; the challenge has no winner. The complete transaction register is in [`artifacts/live-lifecycle.json`](artifacts/live-lifecycle.json).
 
 The lifecycle also includes a passed expiry-boundary regression and a failed early reveal boundary transaction. No payout dispatch was eligible because the final verdict was `NO_BYPASS`.
 

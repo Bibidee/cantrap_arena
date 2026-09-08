@@ -1,6 +1,6 @@
 # GenLayer Portal submission draft
 
-This is the copy-ready content for the Project Explorer form. It is a draft only; the final Portal submit action remains manual.
+This is a draft for the Project Explorer form. The links below point to the current source-matched Studionet deployments.
 
 ## Identity
 
@@ -12,7 +12,7 @@ This is the copy-ready content for the Project Explorer form. It is a draft only
 
 ## Project summary
 
-Contained GenLayer benchmark: validators reproduce prompt-injection attacks while a source-matched vault dispatches a fixed GEN bounty for the first confirmed bypass.
+Contained GenLayer benchmark: validators reproduce prompt-injection attacks while a vault dispatches a fixed GEN bounty for the first confirmed bypass.
 
 ## Description
 
@@ -34,11 +34,11 @@ Heading: Reproduce the benchmark
 
 ## Review verification
 
-Reviewers should see challenge #001 with a 0.01 GEN bounty, a canonical post-reload attack ID of 2, reveal/test controls recovered from Arena, and a finalized NO_BYPASS result with semantic NO, class NONE, and bounded evidence. The deployed Arena and Vault links must resolve to the source-matched Studionet contracts.
+Reviewers should see challenge 1 with a canonical post-reload attack ID, recovered reveal/test controls, and a finalized adjudication result.
 
-Contract link 1: https://explorer-studio.genlayer.com/address/0x57Af04B020861de59EBf12B0079A44333fdD897E
+Contract link 1: https://explorer-studio.genlayer.com/address/0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5
 
-Contract link 2: https://explorer-studio.genlayer.com/address/0x4c98d293DD8E239BA9888361ECd612a10382E420
+Contract link 2: https://explorer-studio.genlayer.com/address/0xB710761d231671C1998462B8D379BBE223BEc899
 
 ## Project links
 

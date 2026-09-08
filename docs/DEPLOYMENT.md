@@ -2,17 +2,17 @@
 
 Network: Studionet; chain ID `61999`; RPC `https://studio.genlayer.com/api`; explorer `https://explorer-studio.genlayer.com`.
 
-The changed Arena source SHA-256 is `B5B699EC75BF6B69604A2C7D054AECDF1C7955D779A21107E989F221ECA94E7A`; Vault SHA-256 is `63FB9CC78F89E42E3085B972668333CD371AF09B76E8F2C207471F8EF0DD8CC0`. Both schemas were generated successfully before deployment.
+The current source SHA-256 values are Arena `5BBD1F0D9F53E7FAA89624B371464034D1446AAC46D0A91DFB07CAD7C4395E7F` and Vault `85D7B8B8BA6908A4250CEABBB2FC9BFBF365EA27F5F7D7A638BFBFD7E57D9CC1`.
 
-## Current source-matched deployment
+## Fresh source-matched deployment
 
-- Arena: `0x57Af04B020861de59EBf12B0079A44333fdD897E`; deployment tx `0xaa4e635ad1c90756466c7b169984f6182e2dbddf5479e84878c95f453eed03b3`; `FINALIZED` / `SUCCESS`.
-- Vault: `0x4c98d293DD8E239BA9888361ECd612a10382E420`; deployment tx `0x3c7f38f921fbe9942c8a26512d130aa7fefea8a3aa734de5569dabe0a3822702`; `FINALIZED` / `SUCCESS`.
-- Binding: tx `0x79f0a0de5b87fbbea8158ac3b5c038ecbc929ca6d3106217fb2b2cf43040a6c3`; `FINALIZED` / `SUCCESS`.
+- Arena: `0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5`; deployment tx `0xf2b73085192ac8775f3cfea1f9e9ba09f509b3168d25940f4546470bce241009`; `FINALIZED` / `SUCCESS`.
+- Vault: `0xB710761d231671C1998462B8D379BBE223BEc899`; deployment tx `0xd00ae6fe426b70516a0adaadd2e9f9224833bf023f561feb9ec8b833af70fe2f`; `FINALIZED` / `SUCCESS`.
+- Binding: tx `0xb9484d5248b649b7e8de5c8af002ba15307bbe8f3d1d83927253ec1506445cbf`; `FINALIZED` / `MAJORITY_AGREE` with leader execution `SUCCESS`.
 
 ## Fresh lifecycle evidence
 
-Challenge `1` was created, funded with exactly `0.01 GEN` (`10000000000000000` raw units), synchronized through the retry path, activated, committed, delayed for the full 900 seconds, revealed, tested, and read back canonically. The final verdict was `NO_BYPASS`; no payout was eligible. Exact transaction records and readback are in `artifacts/live-lifecycle.json`.
+Challenge `1` was created, funded with exactly `0.01 GEN` (`10000000000000000` raw units), activated, committed, delayed for the full 900 seconds, revealed, tested, and read back canonically. The final verdict was `NO_BYPASS`; no payout was eligible. Exact transaction records and readback are in `artifacts/live-lifecycle.json`.
 
 Expiry model tests verify that both revealed and unrevealed pre-expiry commitments block `expire()` during the maximum reveal window, while tested attacks and elapsed windows no longer block it.
 
