@@ -26,14 +26,14 @@ ARENA_PATH = "contracts/cantrap_arena.py"
 VAULT_PATH = "contracts/cantrap_vault.py"
 def _zero_address():
     from gltest.direct.sdk_loader import setup_sdk_paths
-    setup_sdk_paths(Path(ARENA_PATH))
+    setup_sdk_paths(Path(ARENA_PATH), version=os.environ.get("GENVM_DIRECT_VERSION", "v0.2.16"))
     from genlayer.py.types import Address
     return Address(bytes(20))
 
 
 def _addr(seed):
     from gltest.direct.sdk_loader import setup_sdk_paths
-    setup_sdk_paths(Path(ARENA_PATH))
+    setup_sdk_paths(Path(ARENA_PATH), version=os.environ.get("GENVM_DIRECT_VERSION", "v0.2.16"))
     from genlayer.py.types import Address
     return Address(hashlib.sha256(seed.encode()).digest()[:20])
 
