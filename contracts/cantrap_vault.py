@@ -20,7 +20,7 @@ class CantrapVault(gl.Contract):
     total_credited:u256
     total_dispatched:u256
     def __init__(self,arena_address:Address):
-        self.arena_address=arena_address; self.total_credited=u256(0); self.total_dispatched=u256(0)
+        self.arena_address=Address(str(arena_address)); self.total_credited=u256(0); self.total_dispatched=u256(0)
     @gl.public.write.payable
     def fund_challenge(self,challenge_id:u256)->None:
         c=Arena(self.arena_address).view().get_challenge(challenge_id)

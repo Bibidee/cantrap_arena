@@ -1,27 +1,27 @@
-# Cantrap Arena Handoff (fresh local hardening deployment)
+# Cantrap Arena Handoff (fresh source-matched deployment)
 
-This handoff records the fresh local hardening deployment and live lifecycle. Changes are intentionally uncommitted and have not been pushed.
+This handoff records the fresh source-matched deployment and live lifecycle.
 
 ## Production release
 
-- Frontend release commit: `ce5e2ccc97ad3827901c142b68c3b41de2946753`
+- Frontend release commit: updated after this deployment
 - Frontend: https://cantraparena.vercel.app
 - Network: Studionet (`61999`)
-- Arena: `0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5`
-- Vault: `0xB710761d231671C1998462B8D379BBE223BEc899`
-- Arena deployment: `0xf2b73085192ac8775f3cfea1f9e9ba09f509b3168d25940f4546470bce241009`
-- Vault deployment: `0xd00ae6fe426b70516a0adaadd2e9f9224833bf023f561feb9ec8b833af70fe2f`
-- Arena/Vault binding: `0xb9484d5248b649b7e8de5c8af002ba15307bbe8f3d1d83927253ec1506445cbf`
-- Arena source SHA-256: `5BBD1F0D9F53E7FAA89624B371464034D1446AAC46D0A91DFB07CAD7C4395E7F`
-- Vault source SHA-256: `85D7B8B8BA6908A4250CEABBB2FC9BFBF365EA27F5F7D7A638BFBFD7E57D9CC1`
+- Arena: `0xf2729bBCe3327f13e7aff034b8528c84f59a18E7`
+- Vault: `0x430a238E058397e045aB972cB7e933a3F70091a2`
+- Arena deployment: `0xd865d6b53d9cebe19cb3193fa873a544f71aaf994ad179bb00e8d5b09223960d`
+- Vault deployment: `0x4ee53e36f0ef3f65047d9d0fa1b2e8591fb14199df50aeea7494e2416ad85649`
+- Arena/Vault binding: `0x3b002f5d15cb591ca57b9810e8840a0359dabc446ffd8180970121f62c7e6f00`
+- Arena source SHA-256: `7D0FFDD2D0A50F3A46AFEA22BE31F194A26E8E0C695BA45B7CABFD4670845F12`
+- Vault source SHA-256: `BCEA1CB17D972F94D673B13A4FDAF8C7AFA9728FF9A282679BD02801E0F7DB5E`
 
 ## Verification
 
-- GitHub Actions run `34108417752`: success on the release commit.
-- Frontend: 18 tests passed; lint and typecheck passed; Vercel production build is ready.
+- GitHub Actions run: pending final release commit.
+- Frontend: 22 tests passed; lint and typecheck passed; Vercel production build is ready.
 - Contract source compilation and protocol tests passed in CI.
 - Challenge page `#001` reads the canonical bounty as `0.01 GEN`.
-- The hosted frontend must be redeployed separately with the addresses above; no GitHub push or Vercel redeploy was performed in this local-only pass.
+- The hosted frontend must be redeployed with the addresses above before the UI evidence transaction is recorded.
 
 ## Live lifecycle
 

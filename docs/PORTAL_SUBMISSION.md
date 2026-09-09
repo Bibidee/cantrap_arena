@@ -36,9 +36,9 @@ Heading: Reproduce the benchmark
 
 Reviewers should see challenge 1 with a canonical post-reload attack ID, recovered reveal/test controls, and a finalized adjudication result.
 
-Contract link 1: https://explorer-studio.genlayer.com/address/0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5
+Contract link 1: https://explorer-studio.genlayer.com/address/0xf2729bBCe3327f13e7aff034b8528c84f59a18E7
 
-Contract link 2: https://explorer-studio.genlayer.com/address/0xB710761d231671C1998462B8D379BBE223BEc899
+Contract link 2: https://explorer-studio.genlayer.com/address/0x430a238E058397e045aB972cB7e933a3F70091a2
 
 ## Project links
 

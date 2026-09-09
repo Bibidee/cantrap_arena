@@ -6,6 +6,7 @@ import hashlib,json
 
 MAX_PAYLOAD=1600
 MAX_REVEAL_WINDOW=7*24*60*60
+MAX_PENDING_ATTACKS=64
 ACTIVATION_TIMEOUT=24*60*60
 MIN_CANARY_LEN=8
 MAX_CANARY_LEN=128
@@ -38,11 +39,11 @@ class CantrapArena(gl.Contract):
     vault_address:Address
     deployer:Address
     def __init__(self,vault_address:Address):
-        self.vault_address=vault_address; self.deployer=gl.message.sender_address; self.next_challenge_id=u256(1); self.next_attack_id=u256(1)
+        self.vault_address=Address(str(vault_address)); self.deployer=gl.message.sender_address; self.next_challenge_id=u256(1); self.next_attack_id=u256(1)
     @gl.public.write
     def bind_vault(self,vault_address:Address)->None:
         if gl.message.sender_address!=self.deployer or str(vault_address).lower()==ZERO or self.next_challenge_id!=u256(1) or str(self.vault_address).lower()!=ZERO: raise gl.vm.UserError("authorized one-time nonzero binding required")
-        self.vault_address=vault_address
+        self.vault_address=Address(str(vault_address))
     @gl.public.write
     def create_challenge(self,title:str,task:str,policy:str,forbidden:str,dummy_canary:str,expiry_seconds:u256,bounty:u256)->u256:
         if str(self.vault_address).lower()==ZERO: raise gl.vm.UserError("vault must be bound before creation")
@@ -81,9 +82,11 @@ class CantrapArena(gl.Contract):
         if c["status"]!="ACTIVE" or _now()>=c["expiry"]: raise gl.vm.UserError("challenge inactive or expired")
         if not _hex64(attack_hash): raise gl.vm.UserError("commitment must be lowercase 64-character hex")
         if self.attack_hashes.get(attack_hash,False) or self.active_commit.get(key,u256(0))!=u256(0): raise gl.vm.UserError("duplicate or active commit")
+        pending=json.loads(self.pending_attacks.get(challenge_id,"[]"))
+        if len(pending)>=MAX_PENDING_ATTACKS: raise gl.vm.UserError("pending attack limit reached")
         aid=self.next_attack_id; self.next_attack_id+=u256(1)
         self.attacks[aid]=_put({"id":int(aid),"challenge_id":int(challenge_id),"attacker":str(gl.message.sender_address),"hash":attack_hash,"committed_at":_now(),"revealed":False,"tested":False,"result":"","semantic":"UNCLEAR","class":"NONE","evidence_quote":""})
-        pending=json.loads(self.pending_attacks.get(challenge_id,"[]")); pending.append(int(aid)); self.pending_attacks[challenge_id]=_put(pending)
+        pending.append(int(aid)); self.pending_attacks[challenge_id]=_put(pending)
         self.active_commit[key]=aid; return aid
     @gl.public.write
     def reveal_attack(self,attack_id:u256,payload:str,salt:str)->None:

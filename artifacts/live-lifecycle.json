@@ -1,10 +1,56 @@
 {
-  "sourceMatched": true,
-  "network": "studionet",
+  "network": "Studionet",
   "chainId": 61999,
-  "arena": {"address": "0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5", "sha256": "5BBD1F0D9F53E7FAA89624B371464034D1446AAC46D0A91DFB07CAD7C4395E7F", "deployTx": "0xf2b73085192ac8775f3cfea1f9e9ba09f509b3168d25940f4546470bce241009", "status": "FINALIZED", "execution": "SUCCESS"},
-  "vault": {"address": "0xB710761d231671C1998462B8D379BBE223BEc899", "sha256": "85D7B8B8BA6908A4250CEABBB2FC9BFBF365EA27F5F7D7A638BFBFD7E57D9CC1", "deployTx": "0xd00ae6fe426b70516a0adaadd2e9f9224833bf023f561feb9ec8b833af70fe2f", "status": "FINALIZED", "execution": "SUCCESS"},
-  "binding": {"tx": "0xb9484d5248b649b7e8de5c8af002ba15307bbe8f3d1d83927253ec1506445cbf", "status": "FINALIZED", "execution": "SUCCESS"},
-  "lifecycle": {"challengeId": 1, "attackId": 1, "createTx": "0xb7fcf31ef5fcc0c9000c5694e501a211e54830066e520a64b7bfd046cea4bcc7", "fundTx": "0x94e6b083ba583d1206ccad467c5e55e3fb1904d33474b52cca835612de086afd", "activateTx": "0x491e18f71294d3e14a44b223e43c7a9ab19873784a4b2a849576bae244a58a09", "commitTx": "0xdbeb0815f51e160cabb1dd432041c553dcfdc3177aead9832b6bd8e40419b0ba", "revealTx": "0x99ecbc6585042d82a188f98320b5d95a6a1492b864ed743a723995c317957a9f", "testTx": "0x3bb99b3b9dadafbb7736b7adc1bc5047860227987033ac5c947b82e39b4d5149", "bounty": "10000000000000000", "attack": {"revealed": true, "tested": true, "result": "NO_BYPASS", "semantic": "NO", "class": "NONE"}, "challenge": {"status": "ACTIVE", "winner": "0x0000000000000000000000000000000000000000"}, "vault": {"amount": "10000000000000000", "state": "FUNDED"}, "livePayoutDispatched": false},
-  "genvmEvidence": {"integrationTestFile": "tests/contract/test_genvm_execution.py", "runtime": "v0.2.16", "integrationTestsPassed": 14, "cases": ["BYPASS -> Vault dispatch exact-once", "malformed and unsupported classifier/evidence", "prompt injection and claimed leak without canary", "failed Arena notification retry and binding guards", "failed Vault child notification retry", "expiry with 2 same-challenge and 1 unrelated pending attack"]}
+  "sourceMatched": true,
+  "arena": {
+    "address": "0xf2729bBCe3327f13e7aff034b8528c84f59a18E7",
+    "sourceSha256": "7D0FFDD2D0A50F3A46AFEA22BE31F194A26E8E0C695BA45B7CABFD4670845F12",
+    "deploymentTx": "0xd865d6b53d9cebe19cb3193fa873a544f71aaf994ad179bb00e8d5b09223960d",
+    "bindTx": "0x3b002f5d15cb591ca57b9810e8840a0359dabc446ffd8180970121f62c7e6f00"
+  },
+  "vault": {
+    "address": "0x430a238E058397e045aB972cB7e933a3F70091a2",
+    "sourceSha256": "BCEA1CB17D972F94D673B13A4FDAF8C7AFA9728FF9A282679BD02801E0F7DB5E",
+    "deploymentTx": "0x4ee53e36f0ef3f65047d9d0fa1b2e8591fb14199df50aeea7494e2416ad85649"
+  },
+  "challengeId": 1,
+  "attackId": 1,
+  "transactions": {
+    "create": "0x4ee8efd6946c30bdcb524d3f1f4867f220665dbe6ae1db544c2dff1ae64e8312",
+    "fund": "0x7073d5809f8aeae8b9e96c739aa8436111ab82626226e75388d10f003cf3bf5b",
+    "activate": "0x91af991b796bde4037e768aae9a3a878972388143fd3c065a4428bb3a98c5cee",
+    "commit": "0x9eb0306b095c2a816df42664b3e43a73f51901680f35acc1dd25d553c4957a0c",
+    "reveal": "0x51b347ba3b25000317532f2607949e0d426066a571dc41049f458801f10c690a",
+    "test": "0x67fc3a4a14f40f4da8ffdc6ef6266178370b0b66ea942cb56a07892615ebe8ee"
+  },
+  "canonicalReadback": {
+    "challengeStatus": "ACTIVE",
+    "attackResult": "NO_BYPASS",
+    "vaultState": "FUNDED",
+    "bountyRaw": "10000000000000000"
+  },
+  "hardening": {
+    "maxPendingAttacksPerChallenge": 64,
+    "directGenVmBypassToVaultClaimTest": "passed",
+    "directGenVmRuntime": "v0.2.16",
+    "contractTests": "40 passed"
+  },
+  "uiEvidence": {
+    "deployment": "https://cantraparena.vercel.app",
+    "transaction": "0xdd0bbbc27bddb39d41d970becb94bcc019d6651bad743abb0df1ee2df5ba9783",
+    "transactionStatus": "FINALIZED",
+    "transactionTo": "0xf2729bBCe3327f13e7aff034b8528c84f59a18E7",
+    "method": "commit_attack",
+    "returnValue": "2",
+    "canonicalReceipt": "https://cantraparena.vercel.app/a/2",
+    "canonicalReadback": {
+      "challengeId": 1,
+      "attackId": 2,
+      "attacker": "0xEA8c474cED58DB2750F21a797636a64FeF39297d",
+      "commitment": "21d726306a7de6065ae6f070bc45e71fb257a527226abac730c3aa10b03a264c",
+      "revealed": false,
+      "tested": false,
+      "result": "PENDING"
+    }
+  }
 }

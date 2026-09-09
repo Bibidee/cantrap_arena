@@ -6,7 +6,7 @@ It targets **Studionet (chain 61999)** and pins `genlayer-js` to exactly `1.1.8`
 
 ## Run
 
-`npm ci && npm run dev` launches the frontend. The production network is Studionet (chain 61999). The current source-matched deployments are Arena `0xa86fb6dA08f1A931e11E863f1Bf8A846F2F5B8B5` and Vault `0xB710761d231671C1998462B8D379BBE223BEc899`. Browser writes use an injected EIP-1193 wallet, wait for FINALIZED execution success, and reread canonical state.
+`npm ci && npm run dev` launches the frontend. The production network is Studionet (chain 61999). The current source-matched deployments are Arena `0xf2729bBCe3327f13e7aff034b8528c84f59a18E7` and Vault `0x430a238E058397e045aB972cB7e933a3F70091a2`. Browser writes use an injected EIP-1193 wallet, wait for FINALIZED execution success, and reread canonical state.
 
 Every write distinguishes wallet rejection, pending/submitted/consensus phases, finalized GenVM rollback, canonical readback mismatch, and finalized success. Transaction hashes are retained locally with explorer links. Attack preparation and committed state are recoverable from browser receipts, but Arena remains the canonical source for attack IDs and lifecycle truth.
 
